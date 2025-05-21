@@ -1,4 +1,4 @@
-# DocHubIDE Beta
+# DocHub IDE Beta
 
 Этот репозиторий предназначен для взаимодействия Beta-тестировщиков с DocHubIDE.
 
