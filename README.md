@@ -55,6 +55,104 @@
 18. Отправьте изменения на сервер используя кнопку "Отправить изменения на сервер". Следуйте подсказкам интерфейса.
 19. Перейдите в режим просмотра используя кнопку "Завершить редактирование" в правом верхнем углу экрана.
 
+### Simple Repo
+
+[Видео урока "Simple Repo"](https://rutube.ru/video/3986369aad5c2df1f02c32a58f7f392d/)
+
+1. Используйте созданный в результате прохождения сценария [Hello World](#hello-world) репозиторий;
+2. Используя навигатор по репозиторию создайте файл `arch.yaml`;
+3. Подключите созданный файл в файле `dochub.yaml` в секции `imports`;
+4. В файле arch.yaml создайте простой архитектурное описание. Например:
+```yaml
+components: 
+  webproject.frontend:
+    title: Фронтэнд
+    entity: system
+    links: 
+      - id: webproject.backend
+        title: API авторизации
+  webproject.backend:
+    title: Бэкенд
+    entity: system
+    links: 
+      - id: webproject.log
+        title: Логирование
+  webproject.log:
+    title: LOG
+    entity: system
+```
+6. Исследуйте полученный результат в меню "Архитектура" представленный в виде дерева;
+7. Добавьте в файл `arch.yaml` контекст для представления диаграммы архитектурных компонентов. Например:
+```yaml
+contexts: 
+  webproject:
+    location: L1
+    title: L1
+    components: 
+      - webproject.*
+```
+9. Исследуйте полученный результат в меню "Архитектура/Контексты/L1";
+10. Используя конструктор документов, создайте Swagger контракт. Опишите контракт, например:
+```yaml
+openapi: 3.0.0
+info:
+  title: Sample API
+  description: Optional multiline or single-line description in [CommonMark](http://commonmark.org/help/) or HTML.
+  version: 0.1.9
+servers:
+  - url: http://api.example.com/v1
+    description: Optional server description, e.g. Main (production) server
+  - url: http://staging-api.example.com
+    description: Optional server description, e.g. Internal staging server for testing
+paths:
+  /users:
+    get:
+      summary: Returns a list of users.
+      description: Optional extended description in CommonMark or HTML.
+      responses:
+        '200':    # status code
+          description: A JSON array of user names
+          content:
+            application/json:
+              schema: 
+                type: array
+                items: 
+                  type: string
+
+```
+12. Укажите идентификатор созданного документа контракта в связи между `webproject.frontend` и `webproject.backend`. Например:
+```yaml
+components: 
+  webproject.frontend:
+    title: Фронтэнд
+    entity: system
+    links: 
+      - id: webproject.backend
+        title: API авторизации
+        contract: apicontract # <<<<< Здесь идентификатор документа контракта 
+  webproject.backend:
+    title: Бэкенд
+    entity: system
+    links: 
+      - id: webproject.log
+        title: Логирование
+  webproject.log:
+    title: LOG
+    entity: system
+```
+   
+14. С использованием конструктора создайте BPMN диаграмму процесса авторизации;
+15. С использованием графического дизайнера опишите процесс авторизации;
+16. Изучите результат работы по сценарию. Убедитесь, что все артефакты доступный из пользовательского меню;
+17. Откройте главную страницу портала на редактирование и внедрите в нее созданный ранее контекст:
+```markdwon
+# Привет Мир!
+
+![L1](@context/webproject)
+```
+19. Убедитесь, что при выводе главной страницы портала выводится созданный в ходе сценария контекст `webproject`.
+20. Отправьте изменения на сервер используя кнопку "Отправить изменения на сервер". Следуйте подсказкам интерфейса.
+21. Перейдите в режим просмотра используя кнопку "Завершить редактирование" в правом верхнем углу экрана.
 
 ## Отказ от ответственности
 
